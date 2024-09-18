@@ -5,12 +5,7 @@ import { getFunctions } from 'firebase/functions';
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBSoYkWEAUz5iLunbN5aOyUWlj9KeWvbyQ",
-    authDomain: "bookstore-6fb30.firebaseapp.com",
-    projectId: "bookstore-6fb30",
-    storageBucket: "bookstore-6fb30.appspot.com",
-    messagingSenderId: "201207289763",
-    appId: "1:201207289763:web:41099068a48aa59ea3ac16"
+    // add your config
 };
 
 // Initialize Firebase
