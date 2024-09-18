@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "when-reports",
+    "staging": "bookstore-6fb30"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
