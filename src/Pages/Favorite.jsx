@@ -101,7 +101,7 @@ const Favorite = () => {
             setSnackbarSeverity('success');
 
             // Redirect to checkout page with the cartBooks in state
-            navigate('/checkout', { state: { books: updatedBooks } });
+            navigate('/cart', { state: { books: updatedBooks } });
         } catch (err) {
             console.error('Error adding book to cart:', err);
             setSnackbarMessage('Error adding book to cart');

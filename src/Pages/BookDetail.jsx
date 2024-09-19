@@ -80,10 +80,11 @@
 //                 const existingBooks = cartData.books || [];
 //                 const bookId = id;
     
-//                 console.log('Existing books in cart:', existingBooks.map(item => item.id)); 
+//                 console.log('Existing books in cart:', existingBooks.map(item => item.title)); 
     
 //                 // Check if the book is already in the cart by ID
-//                 const existingBookIndex = existingBooks.findIndex(item => item.id === bookId);
+//                 const existingBookIndex = existingBooks.findIndex(item => item.title === book.title);
+//                 console.log(existingBookIndex);
     
 //                 if (existingBookIndex > -1) {
 //                     console.log('Book already in cart, updating quantity.');
@@ -327,44 +328,46 @@ const BookDetail = () => {
     const handleAddToCart = async () => {
         const auth = getAuth();
         const user = auth.currentUser;
-
+    
         if (!user) {
             setSnackbarMessage('Please log in to add items to the cart.');
             setSnackbarSeverity('error');
             setSnackbarOpen(true);
             return;
         }
-
+    
         try {
             const cartRef = doc(db, 'carts', user.uid);
             const cartDoc = await getDoc(cartRef);
             let updatedBooks = [];
-
+    
             if (cartDoc.exists()) {
                 const cartData = cartDoc.data();
                 updatedBooks = cartData.books || [];
-                const existingBookIndex = updatedBooks.findIndex(item => item.id === id);
-                console.log(existingBookIndex);
-                console.log("book id" , id);
-
+                const existingBookIndex = updatedBooks.findIndex(item => item.title === book.title);
+    
                 if (existingBookIndex > -1) {
-                    updatedBooks[existingBookIndex].quantity += 1;
+                    setSnackbarMessage('This book is already in your cart.');
+                    setSnackbarSeverity('warning');
+                    setSnackbarOpen(true);
+                    return;
                 } else {
                     updatedBooks.push({ ...book, quantity: 1 });
                 }
-
+    
                 await updateDoc(cartRef, { books: updatedBooks });
             } else {
+                // First time adding a book to the cart
                 updatedBooks = [{ ...book, quantity: 1 }];
                 await setDoc(cartRef, { books: updatedBooks });
             }
-
+    
             setSnackbarMessage('Book added to cart');
             setSnackbarSeverity('success');
+            setSnackbarOpen(true);
         } catch (err) {
             setSnackbarMessage(err.message || 'Error adding book to cart');
             setSnackbarSeverity('error');
-        } finally {
             setSnackbarOpen(true);
         }
     };

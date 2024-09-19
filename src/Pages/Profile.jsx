@@ -5,21 +5,21 @@ import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const { user } = useFirebase();
-    const [userData, setUserData] = useState({ name: '', email: '', mobile: '' });
-    const [originalUserData, setOriginalUserData] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const { user } = useFirebase();                                                        
+    const [userData, setUserData] = useState({ name: '', email: '', mobile: '' });                     
+    const [originalUserData, setOriginalUserData] = useState(null);                         
+    const [isEditing, setIsEditing] = useState(false);                                     
+    const [error, setError] = useState('');                                                
+    const [loading, setLoading] = useState(true);                                          
+    const [snackbarOpen, setSnackbarOpen] = useState(false);                               
+    const [snackbarMessage, setSnackbarMessage] = useState('');                            
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');                    
 
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
-            const fetchUserData = async () => {
+            const fetchUserData = async () => {   
                 try {
                     const db = getFirestore();
                     const userDoc = doc(db, 'users', user.uid);
@@ -120,7 +120,7 @@ const Profile = () => {
                         {isEditing ? (
                             <>
                                 <Button
-                                    variant="outlined"
+                                   variant="outlined"
                                     color="primary"
                                     onClick={handleUpdate}
                                     sx={{ mr: 2 }}
@@ -136,7 +136,7 @@ const Profile = () => {
                             </>
                         ) : (
                             <Button
-                                variant="outlined"
+                               variant="outlined"
                                 color="secondary"
                                 onClick={() => setIsEditing(true)}
                             >
@@ -151,7 +151,7 @@ const Profile = () => {
                 open={snackbarOpen}
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} 
             >
                 <Alert
                     onClose={handleCloseSnackbar}
